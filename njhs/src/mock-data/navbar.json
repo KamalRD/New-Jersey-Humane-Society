@@ -1,0 +1,24 @@
+{
+    "navElements": [
+        {
+            "link": "/services",
+            "text": "Services",
+            "image": "./services.svg"
+        },
+        {
+            "link": "/about",
+            "text": "About",
+            "image": "./about.svg"
+        },
+        {
+            "link": "/contact",
+            "text": "Contact",
+            "image": "./contact.svg"
+        },
+        {
+            "link": "/donate",
+            "text": "Donate",
+            "image": "./donate.svg"
+        }
+    ]
+}
