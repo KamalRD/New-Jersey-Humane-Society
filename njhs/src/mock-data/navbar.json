@@ -3,22 +3,22 @@
         {
             "link": "/services",
             "text": "Services",
-            "image": "./services.svg"
+            "image": "/navbar/services.svg"
         },
         {
             "link": "/about",
             "text": "About",
-            "image": "./about.svg"
+            "image": "/navbar/about.svg"
         },
         {
             "link": "/contact",
             "text": "Contact",
-            "image": "./contact.svg"
+            "image": "/navbar/contact.svg"
         },
         {
             "link": "/donate",
             "text": "Donate",
-            "image": "./donate.svg"
+            "image": "/navbar/donate.svg"
         }
     ]
 }

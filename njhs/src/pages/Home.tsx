@@ -1,11 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import Hero from '../components/Hero'
+import Services from '../components/homepage/Services'
 
 export default function Home() {
   return (
     <>
         <Navbar></Navbar>
-        <h1>This is the Home Page - the HERO will be here!</h1>
+        <Hero></Hero>
+        <Services></Services>
     </>
   )
 }

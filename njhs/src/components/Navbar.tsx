@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // Data
 import NavData from "../mock-data/navbar.json";
@@ -11,7 +11,7 @@ const NavbarData: Array<NavbarElement> = NavData.navElements;
 
 export default function Navbar() {
     const [ mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+    const activePage = useLocation().pathname;
 
     return (
         <div className="
@@ -22,7 +22,7 @@ export default function Navbar() {
             <div className="col-span-1">
                 <Link to="/">
                     <img 
-                        src="logo.webp"
+                        src="/navbar/logo.webp"
                         alt="New Jersey Humane Society Logo"
                         className="object-fit max-h-20"
                     ></img>
@@ -31,7 +31,7 @@ export default function Navbar() {
 
             <div className="md:hidden">
             <button onClick={() => setMobileMenuOpen(true)} className="flex items-center">
-                <img src={mobileMenuOpen ? "./close.svg" : "./open.svg"} 
+                <img src={mobileMenuOpen ? "/navbar/close.svg" : "/navbar/open.svg"} 
                     className="h-8 w-8"
                     alt={mobileMenuOpen ? "Close Icon" : "Open Icon"}
                 />
@@ -48,13 +48,13 @@ export default function Navbar() {
                         <div className="w-full h-24 flex flex-row items-center justify-between py-2 px-4 border-b-2 border-[#355796]">
                             <Link to="/" onClick={() => setMobileMenuOpen(false)}>
                                 <img 
-                                    src="logo.webp"
+                                    src="/navbar/logo.webp"
                                     alt="New Jersey Humane Society Logo"
                                     className="object-fit max-h-20"
                                 ></img>
                             </Link>
                             <button onClick={() => setMobileMenuOpen(false)} className="flex items-center">
-                                <img src="./close.svg"
+                                <img src="/navbar/close.svg"
                                     className="h-8 w-8"
                                     alt="Close Icon"
                                 />
@@ -64,12 +64,15 @@ export default function Navbar() {
                             <Link 
                                 to={navbarItem.link} 
                                 key={navbarItem.text} 
-                                className={"block py-4 px-4 text-left w-full hover:bg-[#d7ddea]"}
+                                className={"block py-4 px-4 text-left w-full" +  (activePage === navbarItem.link ? " " : " hover:bg-[#d7ddea]")}
                             >
-                                <div className="flex items-center gap-x-4 w-32 m-auto">
+                                <div className={"flex items-center gap-x-4 w-32 m-auto" + (activePage === navbarItem.link ? " pb-2" : "")}>
                                     <img src={navbarItem.image} alt={navbarItem.text + " Icon"} className="h-8 w-8"/>
-                                    <h1 className="text-xl">{navbarItem.text}</h1>
+                                    <h1>{navbarItem.text}</h1>
                                 </div>
+                                { activePage === navbarItem.link &&
+                                    <span className="absolute left-0 right-0 w-32 m-auto h-0.5 bg-[#355796]"></span>
+                                }
                             </Link>
                         ))}
                         </div>
@@ -86,10 +89,16 @@ export default function Navbar() {
                         <Link to={navbarItem.link} key={navbarItem.text} className="group relative">
                             <div className="flex flex-col items-center">
                                 <img src={navbarItem.image} alt={navbarItem.text + " Icon"} className="h-4 w-4"/>
-                                <h1 className="text-xl">{navbarItem.text}</h1>
+                                <h1>{navbarItem.text}</h1>
                             </div>
-                            <span className="absolute left-1/2 w-0 h-0.5 bg-[#355796] group-hover:w-1/3 group-hover:transition-all duration-500"></span>  
-                            <span className="absolute right-1/2 w-0 h-0.5 bg-[#355796] group-hover:w-1/3 group-hover:transition-all duration-500"></span>
+                            { activePage === navbarItem.link ? 
+                                <span className="absolute left-0 right-0 w-[70%] m-auto h-0.5 bg-[#355796]"></span>  
+                                :
+                                <>
+                                    <span className="absolute left-1/2 w-0 h-0.5 bg-[#355796] group-hover:w-[35%] group-hover:transition-all duration-500"></span>  
+                                    <span className="absolute right-1/2 w-0 h-0.5 bg-[#355796] group-hover:w-[35%] group-hover:transition-all duration-500"></span>
+                                </>
+                            }
                         </Link>
                     )
                 })}
@@ -97,31 +106,3 @@ export default function Navbar() {
         </div>
   )
 }
-
-/*
-<div className="md:hidden">
-    <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="flex items-center">
-        <img src={mobileMenuOpen ? "./close.svg" : "./open.svg"} 
-            className="h-8 w-8"
-            alt={mobileMenuOpen ? "Close Icon" : "Open Icon"}
-        />
-    </button>
-    <div className={`absolute top-24 right-0 bg-yellow-600 transform transition-transform ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"} ease-in-out duration-300 z-50`} style={{ width: "100%", maxWidth: "calc(100vw - 2rem)" }}>
-        <div className="w-full">
-            <div className="flex flex-col items-center py-2">
-                {NavbarData.map(navbarItem => (
-                    <Link 
-                        to={navbarItem.link} 
-                        key={navbarItem.text} 
-                        className="block py-2 px-4 text-center"
-                    >
-                        <h1 className="text-xl">{navbarItem.text}</h1>
-                        <span className="absolute left-1/2 w-0 h-0.5 bg-mainBlue group-hover:w-1/4 group-hover:transition-all duration-500"></span>  
-                        <span className="absolute right-1/2 w-0 h-0.5 bg-mainBlue group-hover:w-1/4 group-hover:transition-all duration-500"></span>
-                    </Link>
-                ))}
-            </div>
-        </div>
-    </div>
-</div>
-*/

@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import Home from './pages/Home';
-import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+
+// Styles
+import './index.css';
+
+// Pages 
+import Home from './pages/Home';
+import Services from './pages/Services';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Donate from './pages/Donate';
 
 const appRouter = createBrowserRouter([
   {
@@ -12,19 +20,19 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/services",
-    element: <h1>SERVICES</h1>
+    element: <Services />
   },
   {
     path: "/about",
-    element: <h1>ABOUT</h1>
+    element: <About />
   },
   {
     path: "/contact",
-    element: <h1>CONTACT</h1>
+    element: <Contact />
   },
   {
     path: "/donate",
-    element: <h1>DONATE</h1>
+    element: <Donate />
   },
 
 ])
