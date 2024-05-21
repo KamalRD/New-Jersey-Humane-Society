@@ -1,0 +1,44 @@
+{
+    "footerItems": [
+        {
+            "text": "Services",
+            "link": "/services",
+            "subItems": [
+                {
+                    "text": "Adopt",
+                    "link": "/services/#adopt"
+                },
+                {
+                    "text": "Rescue & Control",
+                    "link": "/services/#rescue-and-control"
+                },
+                {
+                    "text": "Veterinary",
+                    "link": "/services/#veterinary"
+                }
+            ]
+        },
+        {
+            "text": "About",
+            "link": "/about",
+            "subItems": [
+                {
+                    "text": "Our Mission",
+                    "link": "/services/#our-mission"
+                },
+                {
+                    "text": "Who We Are",
+                    "link": "/services/#who-we-are"
+                }
+            ]
+        },
+        {
+            "text": "Contact",
+            "link": "/contact"
+        },
+        {
+            "text": "Donate",
+            "link": "/donate"
+        }
+    ]
+}

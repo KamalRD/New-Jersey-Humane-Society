@@ -11,13 +11,19 @@ const NavbarData: Array<NavbarElement> = NavData.navElements;
 
 export default function Navbar() {
     const [ mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const activePage = useLocation().pathname;
+    let activePage = useLocation().pathname;
+
+    if (activePage[activePage.length - 1] === "/") {
+        activePage = activePage.slice(0, activePage.length - 1);
+    }
 
     return (
         <div className="
+            sticky top-0
             w-full h-24 py-2 px-4 border-b-2 border-[#355796]
             md:grid md:grid-cols-5 
             flex justify-between items-center	
+            bg-white z-50
             ">
             <div className="col-span-1">
                 <Link to="/">

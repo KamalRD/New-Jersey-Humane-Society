@@ -32,5 +32,12 @@ code {
 .embla__slide {
   flex: 0 0 auto;
   min-width: 0;
-  margin: 0 10px
+  margin: 0 10px;
+
+  max-width: 300px;
+  
+  @media (min-width: 587px) {
+      flex: 0 0 50%; /* 2 slides per view on small screens */
+  }
 }
+

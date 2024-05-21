@@ -9,7 +9,6 @@ const routeOptions: {[key: string]: string} = {
 
 export default function Hero() {
 	let imageURL = routeOptions[useLocation().pathname];
-	console.log(imageURL);
 	
 	return (
 		<>
