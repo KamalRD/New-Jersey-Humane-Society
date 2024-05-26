@@ -8,7 +8,9 @@ export default function Services() {
   return (
     <div>
         <Navbar></Navbar>
-        <h1>SERVICES</h1>
+        <h1 id="adopt">Adoption & Fostering</h1>
+        <h1>Rescue & Control</h1>
+        <h1>Veterninary</h1>
         <Footer></Footer>
     </div>
   )

@@ -12,7 +12,7 @@ export default function Hero() {
 	
 	return (
 		<>
-			<div className='w-full bg-cover bg-center max-h-96'
+			<div className='w-full bg-cover bg-center max-h-96 xl:max-h-[480px]'
 				style={{backgroundImage: `url(${imageURL})`,
 						height: 'auto',
 						aspectRatio: '196/109'}}

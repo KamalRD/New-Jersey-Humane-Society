@@ -1,7 +1,25 @@
 {
     "services": [
         {
-            "title": 
+            "title": "Adoption",
+            "link": "/services/#adopt",
+            "image": "./services/adopt.svg",
+            "imageAlt": "Adoption Icon",
+            "text": "As a proud <strong>no-kill</strong> shelter, we strive to find save, loving, forever homes for all the animals in our care. With both dogs - ranging from energetic pups to calm and loving seniors - and cats, each with their own unique personality waiting to brighten your home, we are sure to have a best friend for you."
+        },
+        {
+            "title": "Rescue & Control",
+            "link": "/services/#rescue-and-control",
+            "image": "./services/rescue.svg",
+            "imageAlt": "Rescue Icon",
+            "text": "We specialize in a comprehensive range of rescue and control services to ensure the safety and well-being of both animals and the community. Our team responds to a wide array of request from abuse and neglect complaints to emergency rescue services to reuniting lost pets with their families."
+        },
+        {
+            "title": "Veterinary",
+            "link": "/services/#veterinary",
+            "image": "./services/vet.svg",
+            "imageAlt": "Veterinary Icon",
+            "text": "Taking care of your four-legged friends can be hard and expensive, but we are always here to help keep you, your loved ones, and our community safe. We offer low cost veterinary services, ranging from spaying and neutering to required vaccines to micro-chipping. "
         }
     ]
 }

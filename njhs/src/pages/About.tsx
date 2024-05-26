@@ -8,7 +8,10 @@ export default function About() {
   return (
     <div>
         <Navbar></Navbar>
-        <h1>ABOUT</h1>
+        <div className='bg-[#d7ddea] pt-8 mx-auto'>
+          <h1>ABOUT</h1>
+
+        </div>
         <Footer></Footer>
     </div>
   )

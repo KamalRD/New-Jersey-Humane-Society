@@ -8,3 +8,8 @@ export interface FooterElement {
     link: string,
     subItems?: Array<FooterSubElement>
 }
+
+export interface EmailSignupError {
+    status: boolean,
+    message: string,
+}

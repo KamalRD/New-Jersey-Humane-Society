@@ -1,34 +1,73 @@
-import React, { useState, FormEvent, FormEventHandler } from 'react'
+import { useState, FormEvent, FormEventHandler } from 'react'
 import { Link } from 'react-router-dom';
-
-import * as EmailValidator from 'email-validator';
-
+import { z } from "zod";
 
 // Data
 import FooterData from "../mock-data/footer.json";
 
 // Types
-import { FooterElement, FooterSubElement } from '../types/footer';
+import { FooterElement, FooterSubElement, EmailSignupError } from '../types/footer';
+
+// Functions
+import { buildClassNames, getZodErrorMessage } from "../utils/utils";
+
+const submitEmailSchema = z.string().min(1, { message: "To stay in touch, please fill out this field"}).email("The email you entered is invalid");
+const inputEmailSchema = z.string().email("The email you entered is invalid");
+
 
 export default function Footer() {
     const [ userEmail, setUserEmail ] = useState<string>("");
-    const [ emailError, setEmailError ] = useState<boolean>(false);
+    const [ emailError, setEmailError ] = useState<EmailSignupError>({ status: false, message: ""});
 
     const updateUserEmail = (newUserEmail: string) => {
         setUserEmail(newUserEmail);
+
+        if (newUserEmail.length > 5) {
+            const parsingResult = inputEmailSchema.safeParse(newUserEmail);        
+            if (!parsingResult.success) {
+                setEmailError({
+                    status: true,
+                    message: getZodErrorMessage(parsingResult.error),
+                });
+            } else {
+                setEmailError({
+                    status: false,
+                    message: ""
+                })
+            }
+        } else {
+            setEmailError({
+                status: false,
+                message: ""
+            })
+        }
     }
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         // Create FormData & Get Email
-        const formData = new FormData(event.currentTarget);
-        const email = (formData.get("email") as string);
-      };
+        const formData: FormData = new FormData(event.currentTarget);
+        const email: string = (formData.get("email") as string);
+        const parsingResult = submitEmailSchema.safeParse(email);
+        
+        if (!parsingResult.success) {
+            setEmailError({
+                status: true,
+                message: getZodErrorMessage(parsingResult.error),
+            });
+        } else {
+            setEmailError({
+                status: false,
+                message: ""
+            });
+            console.log("Successful Submission");
+        }
+    };
 
 
     return (
-        <div className="mt-16 ">
+        <>
             <div className="px-4 pt-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div className="grid md:gap-8 gap-6 row-gap-10 mb-8 lg:grid-cols-6">
                     <div className="md:max-w-md lg:col-span-2 mx-auto">
@@ -44,7 +83,7 @@ export default function Footer() {
                     {FooterData.footerItems.map((footerItem: FooterElement) => {
                         if (footerItem.subItems) {
                             return (
-                                <div key={footerItem.text} className='md:max-w-34 max-w-32'>
+                                <div key={footerItem.text} className='max-w-34'>
                                     <Link to={footerItem.link} key={footerItem.text}>
                                     <p className="font-semibold">
                                         {footerItem.text}
@@ -84,8 +123,7 @@ export default function Footer() {
                                 placeholder="Enter Your Email"
                                 type="text"
                                 value={userEmail}
-                                
-                                className="flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-[#355796] focus:outline-none focus:shadow-outline"
+                                className={buildClassNames(emailError.status ? "border-red-700 focus:border-red-700" : "", "flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-[#355796] focus:outline-none focus:shadow-outline")}
                             />
                             <button
                                 type="submit"
@@ -94,6 +132,9 @@ export default function Footer() {
                                 Subscribe
                             </button>
                         </form>
+                        {emailError.status && (
+                            <span className="text-red-700 text-sm">{emailError.message}</span>
+                        )}
                     </div>
                 </div>
                 </div>
@@ -101,7 +142,7 @@ export default function Footer() {
                     <p className="text-sm text-black">
                         © Copyright 2024 New Jersey Humane Society | All Rights Reserved
                     </p>
-                    <div className="flex items-center mt-4 space-x-4 sm:mt-0 sm:justify-center mx-auto">
+                    <div className="flex items-center mt-4 space-x-4 sm:mt-0 sm:justify-center mx-auto md:mx-0">
                         <a href="/" className="transition-colors duration-300 text-black hover:text-[#355796]">
                         <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
                             <path
@@ -127,6 +168,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
   )
 }
